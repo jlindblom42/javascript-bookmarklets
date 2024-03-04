@@ -1,6 +1,6 @@
 # Javascript Bookmarklets
 
-Just a collection of javascript bookmarklets for personal use. Feel free to use, modify, or contribute.
+Collection of javascript bookmarklets for personal use. Feel free to use, modify, or contribute.
 
 To use, copypaste the desired script into a new bookmark.
 
