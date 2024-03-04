@@ -6,6 +6,9 @@ javascript:(function () {
         index++;
         const inputVar = 'input' + index;
         const value = input.value;
+        if (value === '') {
+            return;
+        }
         let selector = '';
         if (input.form && (input.form.id || input.form.name)) {
             selector += input.form.tagName.toLowerCase();
@@ -44,6 +47,9 @@ javascript:(function () {
     selects.forEach(function (select) {
         index++;
         const value = select.value;
+        if (value === '') {
+            return;
+        }
         let selector = select.tagName.toLowerCase();
         if (select.name) {
             selector += '[name="' + select.name + '"]';
@@ -54,11 +60,11 @@ javascript:(function () {
         var selectVar = 'select' + index;
         scriptContent += 'const ' + selectVar + ' = document.querySelector(\'' + selector + '\');';
         scriptContent += 'if (' + selectVar + ') {';
-        scriptContent += 'Array.from(' + selectVar + '.options).find(opt => opt.value === "' + value.replace(/"/g, '\\"') + '").selected = true;';
-        scriptContent += selectVar + '.dispatchEvent(new Event(\'change\'));'
+        scriptContent += 'const ' + selectVar + 'Opts = Array.from(' + selectVar + '.options).find(opt => opt.value === "' + value.replace(/"/g, '\\"') + '");';
+        scriptContent += 'if (' + selectVar + 'Opts) ' + selectVar + 'Opts.selected = true;';
+        scriptContent += selectVar + '.dispatchEvent(new Event(\'change\'));';
         scriptContent += '}';
     });
     scriptContent += '})();';
-    console.log('Bookmarklet:', scriptContent);
-    copy(scriptContent);
+    console.log(scriptContent);
 })();
