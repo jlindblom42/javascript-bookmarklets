@@ -67,4 +67,11 @@ javascript:(function () {
     });
     scriptContent += '})();';
     console.log(scriptContent);
+    if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(scriptContent).then(function () {
+            console.log('Bookmarklet copied to clipboard.');
+        }).catch(function (error) {
+            console.error('Error copying text: ', error);
+        });
+    }
 })();
