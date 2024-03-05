@@ -22,8 +22,8 @@ dynamic forms respond as if a user manually updated each field.
 
 ### [Highlight Inputs](bookmarklets/highlight-inputs.js?raw=1)
 
-Highlights input fields on a webpage. Adds green border to fields with values, red for
-fields with no value.
+Highlights input fields on a page. Adds green border for fields with values, red for fields with no value.
+Not dynamic, will not refresh on input entry or selection.
 
 ### [Invert Images](bookmarklets/invert-images.js?raw=1)
 
