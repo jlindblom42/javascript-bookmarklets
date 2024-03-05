@@ -28,3 +28,8 @@ Not dynamic, will not refresh on input entry or selection.
 ### [Invert Images](bookmarklets/invert-images.js?raw=1)
 
 Toggles an inversion filter on all images and SVG elements on a webpage.
+
+### [Pointer Spotlight](bookmarklets/pointer-spotlight.js?raw=1)
+
+Entire page is darkened except for a 100px radius circle around the mouse pointer,
+allowing the user to focus on a specific area of the page as they move the cursor.
