@@ -58,14 +58,15 @@ javascript:(function () {
             const nestedInputVar = inputVar + '[' + nestedIndex + ']';
 
             if (type === 'checkbox' || nestedInput.checked && type === 'radio') {
-                scriptContent += 'if (' + nestedInputVar + ') {';
+                scriptContent += 'if (' + nestedInputVar + ' && ' + nestedInputVar + '.checked !== ' + nestedInput.checked + ') {';
                 scriptContent += nestedInputVar + '.checked=' + nestedInput.checked + ';';
                 scriptContent += nestedInputVar + '.dispatchEvent(new Event(\'change\'));';
                 scriptContent += '}';
                 nestedIndex++;
             } else if (type !== 'hidden') {
-                scriptContent += 'if (' + nestedInputVar + ') {';
-                scriptContent += nestedInputVar + '.value="' + value.replace(/"/g, '\\"') + '";';
+                let normalizedValue = value.replace(/"/g, '\\"');
+                scriptContent += 'if (' + nestedInputVar + ' && ' + nestedInputVar + '.value !== \'' + normalizedValue + '\') {';
+                scriptContent += nestedInputVar + '.value="' + normalizedValue + '";';
                 scriptContent += nestedInputVar + '.dispatchEvent(new Event(\'change\'));';
                 scriptContent += '}';
                 nestedIndex++;
@@ -74,9 +75,20 @@ javascript:(function () {
     });
     const selects = document.querySelectorAll('select');
     index = 0;
+    scriptContent += 'let changed;';
     selects.forEach(function (select) {
         index++;
-        let selector = select.tagName.toLowerCase();
+        let selector = '';
+        if (select.form && (select.form.id || select.form.name)) {
+            selector += select.form.tagName.toLowerCase();
+            if (select.form.name) {
+                selector += '[name=' + select.form.name + ']';
+            } else if (select.form.id) {
+                selector += '[id=' + select.form.id + ']';
+            }
+            selector += ' ';
+        }
+        selector += select.tagName.toLowerCase();
         if (select.name) {
             selector += '[name="' + select.name + '"]';
         } else if (select.id) {
@@ -87,15 +99,25 @@ javascript:(function () {
         }
         selectorSet.add(selector);
         let selectedOptsSelector = selector + ' option';
-        var selectVar = 'selectOpts' + index;
+        const selectVar = 'selectOpts' + index;
         scriptContent += 'const ' + selectVar + ' = document.querySelectorAll(\'' + selectedOptsSelector + '\');';
+        scriptContent += 'changed = false;';
         const selectedOpts = document.querySelectorAll(selectedOptsSelector);
+        const selectedOptIndexSet = new Set();
         selectedOpts.forEach(function (selectedOpt) {
+            if (selectedOptIndexSet.has(selectedOpt.index)) {
+                return;
+            }
+            selectedOptIndexSet.add(selectedOpt.index);
+            const selectedOptVar = selectVar + '[' + selectedOpt.index + ']';
             if (select.multiple || selectedOpt.selected) {
-                scriptContent += selectVar + '[' + selectedOpt.index + '].selected = ' + selectedOpt.selected + ';';
+                scriptContent += 'if (' + selectedOptVar + ' && ' + selectedOptVar + '.selected !== ' + selectedOpt.selected + ') {';
+                scriptContent += selectedOptVar + '.selected = ' + selectedOpt.selected + ';';
+                scriptContent += 'changed = true;';
+                scriptContent += '}';
             }
         });
-        scriptContent += 'document.querySelector(\'' + selector + '\').dispatchEvent(new Event(\'change\'));';
+        scriptContent += 'if (changed) document.querySelector(\'' + selector + '\')?.dispatchEvent(new Event(\'change\'));';
     });
     scriptContent += '})();';
     console.log(scriptContent);
