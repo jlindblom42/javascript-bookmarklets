@@ -1,13 +1,25 @@
 javascript:(function () {
     const hiddenInputs = document.querySelectorAll('input[type="hidden"]');
     for (let i = 0; i < hiddenInputs.length; i++) {
-        hiddenInputs[i].type = 'text';
-        hiddenInputs[i].style.backgroundColor = '#f0e68c';
-        hiddenInputs[i].style.width = '200px';
-        hiddenInputs[i].style.height = '25px';
-        hiddenInputs[i].style.fontSize = '12x';
-        hiddenInputs[i].style.position = 'relative';
-        hiddenInputs[i].style.zIndex = '99999';
+        let input = hiddenInputs[i];
+        input.type = 'text';
+        input.style.backgroundColor = '#f0e68c';
+        input.style.width = '200px';
+        input.style.height = '25px';
+        input.style.fontSize = '12x';
+        input.style.position = 'relative';
+        input.style.zIndex = '99999';
+        const testDiv = document.createElement('div');
+        testDiv.style.position = 'absolute';
+        testDiv.style.visibility = 'hidden';
+        testDiv.style.height = 'auto';
+        testDiv.style.width = 'auto';
+        testDiv.style.whiteSpace = 'nowrap';
+        testDiv.textContent = input.value;
+        testDiv.style.fontSize = window.getComputedStyle(input).fontSize;
+        document.body.appendChild(testDiv);
+        input.style.width = (testDiv.offsetWidth + 30) + 'px';
+        document.body.removeChild(testDiv);
         const label = document.createElement('label');
         label.style.display = 'block';
         label.style.marginTop = '10px';
@@ -16,7 +28,7 @@ javascript:(function () {
         label.style.fontWeight = 'bold';
         label.style.position = 'relative';
         label.style.zIndex = '9999';
-        label.textContent = hiddenInputs[i].name || hiddenInputs[i].id;
-        hiddenInputs[i].parentNode.insertBefore(label, hiddenInputs[i]);
+        label.textContent = input.name || input.id;
+        input.parentNode.insertBefore(label, input);
     }
 })();
