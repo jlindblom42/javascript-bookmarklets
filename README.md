@@ -27,4 +27,4 @@ fields with no value.
 
 ### [Invert Images](bookmarklets/invert-images.js?raw=1)
 
-Toggles an inversion filter on all images and SVG elements on a webpage, making them appear in their inverted colors.
+Toggles an inversion filter on all images and SVG elements on a webpage.
