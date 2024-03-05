@@ -64,9 +64,8 @@ javascript:(function () {
                 scriptContent += '}';
                 nestedIndex++;
             } else if (type !== 'hidden') {
-                let normalizedValue = value.replace(/"/g, '\\"');
-                scriptContent += 'if (' + nestedInputVar + ' && ' + nestedInputVar + '.value !== \'' + normalizedValue + '\') {';
-                scriptContent += nestedInputVar + '.value="' + normalizedValue + '";';
+                scriptContent += 'if (' + nestedInputVar + ' && ' + nestedInputVar + '.value !== "' + value + '") {';
+                scriptContent += nestedInputVar + '.value="' + value + '";';
                 scriptContent += nestedInputVar + '.dispatchEvent(new Event(\'change\'));';
                 scriptContent += nestedInputVar + '.dispatchEvent(new Event(\'blur\'));';
                 scriptContent += '}';
