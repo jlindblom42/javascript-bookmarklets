@@ -33,3 +33,8 @@ Toggles an inversion filter on all images and SVG elements on a webpage.
 
 Entire page is darkened except for a 100px radius circle around the mouse pointer,
 allowing the user to focus on a specific area of the page as they move the cursor.
+
+### [Reveal Hidden Inputs](bookmarklets/reveal-hidden-inputs.js?raw=1)
+
+Transforms all hidden input fields into visible text fields. Inserts a label before each
+field, displaying the input's name or ID.
