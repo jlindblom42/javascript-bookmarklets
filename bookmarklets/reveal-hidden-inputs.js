@@ -32,7 +32,7 @@ javascript:(function () {
         label.style.padding = '3px';
         label.style.backgroundColor = 'white';
         label.style.display = 'table';
-        label.textContent = input.name || input.id;
+        label.textContent = input.name || input.id || input.className;
         input.parentNode.insertBefore(label, input);
     }
 })();
