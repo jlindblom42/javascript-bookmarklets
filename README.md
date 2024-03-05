@@ -14,7 +14,7 @@ activation until it cycles back to the original transparency.
 Toggles a simple "dark mode" for the page. Changes the background color, text
 color, and link colors to dark mode friendly values.
 
-### [Form Capture](bookmarklets/form-input-bookmarklet-generator.js?raw=1)
+### [Form Capture](bookmarklets/form-capture.js?raw=1)
 
 Generates another bookmarklet that, when executed, automatically fills in and selects the current values of inputs,
 textareas, and select elements on a webpage. Simulates user interactions with change and blur events to ensure that
