@@ -5,7 +5,7 @@ javascript:(function () {
         input.type = 'text';
         input.style.backgroundColor = '#f0e68c';
         input.style.width = '200px';
-        input.style.height = '25px';
+        input.style.height = '14px';
         input.style.fontSize = '12x';
         input.style.position = 'relative';
         input.style.zIndex = '99999';
