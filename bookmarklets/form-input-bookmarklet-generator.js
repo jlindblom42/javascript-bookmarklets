@@ -8,13 +8,13 @@ javascript:(function () {
         index++;
         let selector = '';
         if (input.form && (input.form.id || input.form.name)) {
-            selector += input.form.tagName.toLowerCase();
+            let formSelector = input.form.tagName.toLowerCase();
             if (input.form.name) {
-                selector += '[name=' + input.form.name + ']';
+                formSelector += '[name=' + input.form.name + ']';
             } else if (input.form.id) {
-                selector += '[id=' + input.form.id + ']';
+                formSelector += '[id=' + input.form.id + ']';
             }
-            selector += ' ';
+            selector += formSelector + ' ';
         }
         selector += input.tagName.toLowerCase();
         let notSpecific = true;
@@ -68,6 +68,7 @@ javascript:(function () {
                 scriptContent += 'if (' + nestedInputVar + ' && ' + nestedInputVar + '.value !== \'' + normalizedValue + '\') {';
                 scriptContent += nestedInputVar + '.value="' + normalizedValue + '";';
                 scriptContent += nestedInputVar + '.dispatchEvent(new Event(\'change\'));';
+                scriptContent += nestedInputVar + '.dispatchEvent(new Event(\'blur\'));';
                 scriptContent += '}';
                 nestedIndex++;
             }
@@ -80,13 +81,13 @@ javascript:(function () {
         index++;
         let selector = '';
         if (select.form && (select.form.id || select.form.name)) {
-            selector += select.form.tagName.toLowerCase();
+            let formSelector = select.form.tagName.toLowerCase();
             if (select.form.name) {
-                selector += '[name=' + select.form.name + ']';
+                formSelector += '[name=' + select.form.name + ']';
             } else if (select.form.id) {
-                selector += '[id=' + select.form.id + ']';
+                formSelector += '[id=' + select.form.id + ']';
             }
-            selector += ' ';
+            selector += formSelector + ' ';
         }
         selector += select.tagName.toLowerCase();
         if (select.name) {
