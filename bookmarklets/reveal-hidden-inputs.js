@@ -9,6 +9,7 @@ javascript:(function () {
         input.style.fontSize = '12x';
         input.style.position = 'relative';
         input.style.zIndex = '99999';
+        input.style.color = 'black';
         const testDiv = document.createElement('div');
         testDiv.style.position = 'absolute';
         testDiv.style.visibility = 'hidden';
@@ -28,6 +29,9 @@ javascript:(function () {
         label.style.fontWeight = 'bold';
         label.style.position = 'relative';
         label.style.zIndex = '9999';
+        label.style.padding = '3px';
+        label.style.backgroundColor = 'white';
+        label.style.display = 'table';
         label.textContent = input.name || input.id;
         input.parentNode.insertBefore(label, input);
     }
