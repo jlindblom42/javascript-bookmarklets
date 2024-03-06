@@ -123,9 +123,13 @@ javascript:(function () {
     console.log(scriptContent);
     if (navigator.clipboard && window.isSecureContext) {
         navigator.clipboard.writeText(scriptContent).then(function () {
-            console.log('Bookmarklet copied to clipboard.');
+            console.log('Javascript bookmarklet copied to clipboard.');
+            alert('Javascript bookmarklet created and copied to clipboard.');
         }).catch(function (error) {
             console.error('Error copying text: ', error);
+            alert('Javascript bookmarklet created but failed to copy to clipboard, see dev console instead.');
         });
+    } else {
+        alert('Javascript bookmarklet created, see dev console.');
     }
 })();
