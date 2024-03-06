@@ -36,6 +36,7 @@ javascript:(function () {
         label.style.border = 'solid black 1px';
         label.textContent = input.name || input.id || input.className;
         input.parentNode.insertBefore(label, input);
+        label.appendChild(document.createElement('br'));
         label.appendChild(input);
     }
 })();
