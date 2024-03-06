@@ -5,11 +5,12 @@ javascript:(function () {
         input.type = 'text';
         input.style.backgroundColor = '#f0e68c';
         input.style.width = '200px';
-        input.style.height = '14px';
+        input.style.height = '20px';
         input.style.fontSize = '12x';
         input.style.position = 'relative';
         input.style.zIndex = '99999';
         input.style.color = 'black';
+        input.style.fontWeight = 'normal';
         const testDiv = document.createElement('div');
         testDiv.style.position = 'absolute';
         testDiv.style.visibility = 'hidden';
@@ -29,10 +30,12 @@ javascript:(function () {
         label.style.fontWeight = 'bold';
         label.style.position = 'relative';
         label.style.zIndex = '9999';
-        label.style.padding = '3px';
+        label.style.padding = '0px 3px 4px 3px';
         label.style.backgroundColor = 'white';
         label.style.display = 'table';
+        label.style.border = 'solid black 1px';
         label.textContent = input.name || input.id || input.className;
         input.parentNode.insertBefore(label, input);
+        label.appendChild(input);
     }
 })();
